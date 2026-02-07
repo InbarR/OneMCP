@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="OneMCP Logo" width="128" height="128">
+  <img src="resources/logo.png" alt="OneMCP Logo" width="128" height="128">
 </p>
 
 # OneMCP

@@ -28,7 +28,7 @@ const config: ForgeConfig = {
   makers: [
     new MakerSquirrel({
       name: 'OneMCP',
-      iconUrl: 'https://raw.githubusercontent.com/InbarR/OneMCP/main/logo.png',
+      iconUrl: 'https://raw.githubusercontent.com/InbarR/OneMCP/main/resources/logo.png',
       ...(hasIco && { setupIcon: path.join(resourcesDir, 'icon.ico') }),
     }),
     new MakerZIP({}, ['darwin']),
