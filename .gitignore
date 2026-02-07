@@ -32,3 +32,8 @@ release/
 
 # TypeScript
 *.tsbuildinfo
+
+# Internal development files
+backlog/
+CLAUDE.md
+.github/copilot-instructions.md
