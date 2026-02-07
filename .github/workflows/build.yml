@@ -1,0 +1,129 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            platform: win32
+            arch: x64
+          - os: macos-latest
+            platform: darwin
+            arch: x64
+          - os: macos-latest
+            platform: darwin
+            arch: arm64
+          - os: ubuntu-latest
+            platform: linux
+            arch: x64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Generate platform-specific icons
+      - name: Generate Windows icon
+        if: matrix.platform == 'win32'
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.Drawing
+          $img = [System.Drawing.Image]::FromFile("$PWD\logo.png")
+          $ico = [System.Drawing.Icon]::FromHandle($img.GetHicon())
+          $stream = [System.IO.File]::Create("$PWD\resources\icon.ico")
+          $ico.Save($stream)
+          $stream.Close()
+          $ico.Dispose()
+          $img.Dispose()
+
+      - name: Generate macOS icon
+        if: matrix.platform == 'darwin'
+        run: |
+          mkdir -p resources/icon.iconset
+          sips -z 16 16     logo.png --out resources/icon.iconset/icon_16x16.png
+          sips -z 32 32     logo.png --out resources/icon.iconset/icon_16x16@2x.png
+          sips -z 32 32     logo.png --out resources/icon.iconset/icon_32x32.png
+          sips -z 64 64     logo.png --out resources/icon.iconset/icon_32x32@2x.png
+          sips -z 128 128   logo.png --out resources/icon.iconset/icon_128x128.png
+          sips -z 256 256   logo.png --out resources/icon.iconset/icon_128x128@2x.png
+          sips -z 256 256   logo.png --out resources/icon.iconset/icon_256x256.png
+          sips -z 512 512   logo.png --out resources/icon.iconset/icon_256x256@2x.png
+          sips -z 512 512   logo.png --out resources/icon.iconset/icon_512x512.png
+          sips -z 1024 1024 logo.png --out resources/icon.iconset/icon_512x512@2x.png
+          iconutil -c icns resources/icon.iconset -o resources/icon.icns
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run type check
+        run: npm run typecheck
+
+      - name: Build for ${{ matrix.platform }}-${{ matrix.arch }}
+        run: npm run make -- --arch=${{ matrix.arch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: OneMCP-${{ matrix.platform }}-${{ matrix.arch }}
+          path: |
+            out/make/**/*.exe
+            out/make/**/*.zip
+            out/make/**/*.dmg
+            out/make/**/*.deb
+            out/make/**/*.rpm
+            out/make/**/*.nupkg
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/**/*.exe
+            artifacts/**/*.zip
+            artifacts/**/*.dmg
+            artifacts/**/*.deb
+            artifacts/**/*.rpm
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -11,7 +11,20 @@ export async function initPathResolver(): Promise<void> {
 }
 
 export function getPlatform(): 'win32' | 'darwin' | 'linux' {
-  return cachedPlatform || 'win32';
+  if (cachedPlatform) {
+    return cachedPlatform;
+  }
+
+  // Fallback: detect platform from navigator if available
+  if (typeof navigator !== 'undefined' && navigator.platform) {
+    const platform = navigator.platform.toLowerCase();
+    if (platform.includes('win')) return 'win32';
+    if (platform.includes('mac')) return 'darwin';
+    return 'linux';
+  }
+
+  // Last resort: assume linux as it's more common in dev environments than specific Windows paths
+  return 'linux';
 }
 
 export function resolvePath(pathTemplate: string): string {

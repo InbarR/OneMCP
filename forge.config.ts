@@ -6,21 +6,39 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import * as path from 'path';
+import * as fs from 'fs';
+
+// Check which icon files exist
+const resourcesDir = path.join(__dirname, 'resources');
+const hasIco = fs.existsSync(path.join(resourcesDir, 'icon.ico'));
+const hasIcns = fs.existsSync(path.join(resourcesDir, 'icon.icns'));
+const hasPng = fs.existsSync(path.join(resourcesDir, 'icon.png'));
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     name: 'OneMCP',
-    icon: './resources/icon',
+    icon: path.join(resourcesDir, 'icon'),
   },
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
       name: 'OneMCP',
+      iconUrl: 'https://raw.githubusercontent.com/InbarR/OneMCP/main/logo.png',
+      ...(hasIco && { setupIcon: path.join(resourcesDir, 'icon.ico') }),
     }),
     new MakerZIP({}, ['darwin']),
-    new MakerRpm({}),
-    new MakerDeb({}),
+    new MakerRpm({
+      options: {
+        ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
+      },
+    }),
+    new MakerDeb({
+      options: {
+        ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
+      },
+    }),
   ],
   plugins: [
     new VitePlugin({

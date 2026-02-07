@@ -226,15 +226,31 @@ async function scanNpmPackages(globalPath: string): Promise<DiscoveredServer[]> 
   return servers;
 }
 
+function getPythonCommand(): string {
+  // On macOS and Linux, prefer python3 as python may not exist or be Python 2
+  return process.platform === 'win32' ? 'python' : 'python3';
+}
+
 async function scanCommonLocations(): Promise<DiscoveredServer[]> {
   const servers: DiscoveredServer[] = [];
   const home = os.homedir();
 
+  // Platform-specific paths for MCP server discovery
   const commonPaths = [
     path.join(home, '.mcp'),
     path.join(home, 'mcp-servers'),
-    path.join(home, '.local', 'share', 'mcp'),
   ];
+
+  // Add platform-specific paths
+  if (process.platform === 'darwin') {
+    commonPaths.push(path.join(home, 'Library', 'Application Support', 'mcp'));
+  } else if (process.platform === 'linux') {
+    commonPaths.push(path.join(home, '.local', 'share', 'mcp'));
+    commonPaths.push(path.join(home, '.config', 'mcp'));
+  } else if (process.platform === 'win32') {
+    const appData = process.env.APPDATA || path.join(home, 'AppData', 'Roaming');
+    commonPaths.push(path.join(appData, 'mcp'));
+  }
 
   for (const searchPath of commonPaths) {
     try {
@@ -255,7 +271,7 @@ async function scanCommonLocations(): Promise<DiscoveredServer[]> {
               try {
                 await fs.promises.access(fullPath);
                 const ext = path.extname(possible);
-                const command = ext === '.py' ? 'python' : 'node';
+                const command = ext === '.py' ? getPythonCommand() : 'node';
 
                 servers.push({
                   name: entry,
