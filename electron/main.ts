@@ -11,6 +11,11 @@ declare const MAIN_WINDOW_VITE_NAME: string;
 let mainWindow: BrowserWindow | null = null;
 
 const createWindow = async () => {
+  // Get icon path - works in both dev and production
+  const iconPath = app.isPackaged
+    ? path.join(process.resourcesPath, 'icon.png')
+    : path.join(__dirname, '../../resources/icon.png');
+
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -19,6 +24,7 @@ const createWindow = async () => {
     x: 100,
     y: 100,
     backgroundColor: '#1a1a2e',
+    icon: iconPath,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

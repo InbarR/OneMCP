@@ -20,6 +20,9 @@ const config: ForgeConfig = {
     asar: true,
     name: 'OneMCP',
     icon: path.join(resourcesDir, 'icon'),
+    extraResource: [
+      path.join(resourcesDir, 'icon.png'),
+    ],
   },
   rebuildConfig: {},
   makers: [

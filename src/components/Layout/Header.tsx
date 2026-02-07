@@ -1,4 +1,5 @@
 import { RefreshCw, Upload, Download, Settings, ScrollText } from 'lucide-react';
+import logoImage from '../../assets/logo.png';
 import { Button } from '../ui/button';
 import {
   Tooltip,
@@ -21,9 +22,7 @@ export function Header({ onRefresh, onImport, onExport, onSettings, onToggleLogs
   return (
     <header className="drag-region flex h-14 items-center justify-between border-b px-6">
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-          MCP
-        </div>
+        <img src={logoImage} alt="OneMCP" className="h-8 w-8 rounded-lg" />
         <h1 className="text-lg font-semibold">OneMCP</h1>
       </div>
 
