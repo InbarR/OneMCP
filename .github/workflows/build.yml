@@ -42,20 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Generate platform-specific icons
-      - name: Generate Windows icon
-        if: matrix.platform == 'win32'
-        shell: pwsh
-        run: |
-          Add-Type -AssemblyName System.Drawing
-          $img = [System.Drawing.Image]::FromFile("$PWD\resources/logo.png")
-          $ico = [System.Drawing.Icon]::FromHandle($img.GetHicon())
-          $stream = [System.IO.File]::Create("$PWD\resources\icon.ico")
-          $ico.Save($stream)
-          $stream.Close()
-          $ico.Dispose()
-          $img.Dispose()
-
+      # Generate macOS icon (icns) - Windows/Linux icons are committed
       - name: Generate macOS icon
         if: matrix.platform == 'darwin'
         run: |
