@@ -1,0 +1,94 @@
+{
+  "tools": [
+    {
+      "id": "claude-desktop",
+      "name": "Claude Desktop",
+      "icon": "claude",
+      "platforms": {
+        "win32": "%APPDATA%/Claude/claude_desktop_config.json",
+        "darwin": "~/Library/Application Support/Claude/claude_desktop_config.json",
+        "linux": "~/.config/Claude/claude_desktop_config.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers"
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "icon": "terminal",
+      "platforms": {
+        "win32": "~/.claude.json",
+        "darwin": "~/.claude.json",
+        "linux": "~/.claude.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers"
+    },
+    {
+      "id": "roo",
+      "name": "Roo",
+      "icon": "bot",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
+        "darwin": "~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
+        "linux": "~/.config/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers",
+      "supportsAlwaysAllow": true,
+      "supportsAutoApprove": true,
+      "supportsDisabled": true
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "icon": "message-square",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+        "darwin": "~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+        "linux": "~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers",
+      "supportsAlwaysAllow": true,
+      "supportsAutoApprove": true,
+      "supportsDisabled": true
+    },
+    {
+      "id": "vscode-copilot",
+      "name": "VS Code Copilot",
+      "icon": "code",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/settings.json",
+        "darwin": "~/Library/Application Support/Code/User/settings.json",
+        "linux": "~/.config/Code/User/settings.json"
+      },
+      "configFormat": "mcp.servers",
+      "serverKey": "mcp.servers"
+    },
+    {
+      "id": "ghcp",
+      "name": "GHCP",
+      "icon": "github",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/mcp.json",
+        "darwin": "~/Library/Application Support/Code/User/mcp.json",
+        "linux": "~/.config/Code/User/mcp.json"
+      },
+      "configFormat": "servers",
+      "serverKey": "servers"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "icon": "mouse-pointer",
+      "platforms": {
+        "win32": "~/.cursor/mcp.json",
+        "darwin": "~/.cursor/mcp.json",
+        "linux": "~/.cursor/mcp.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers"
+    }
+  ]
+}
