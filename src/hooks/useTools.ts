@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useStore } from './useStore';
 import { getBuiltInTools } from '../lib/toolRegistry';
 import { initPathResolver } from '../lib/pathResolver';
@@ -39,6 +39,10 @@ declare global {
       app: {
         getPath: (name: 'home' | 'appData' | 'userData' | 'temp') => Promise<string>;
         getPlatform: () => Promise<string>;
+      };
+      shell: {
+        openPath: (filePath: string) => Promise<{ success: boolean; error?: string }>;
+        showItemInFolder: (filePath: string) => Promise<{ success: boolean; error?: string }>;
       };
     };
   }
