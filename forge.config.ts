@@ -19,6 +19,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     name: 'OneMCP',
+    executableName: 'OneMCP',
     icon: path.join(resourcesDir, 'icon'),
     extraResource: [
       path.join(resourcesDir, 'icon.png'),
@@ -34,11 +35,13 @@ const config: ForgeConfig = {
     new MakerZIP({}, ['darwin']),
     new MakerRpm({
       options: {
+        bin: 'OneMCP',
         ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
       },
     }),
     new MakerDeb({
       options: {
+        bin: 'OneMCP',
         ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
       },
     }),
