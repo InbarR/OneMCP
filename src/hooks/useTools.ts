@@ -4,50 +4,6 @@ import { getBuiltInTools } from '../lib/toolRegistry';
 import { initPathResolver } from '../lib/pathResolver';
 import type { Tool } from '../types';
 
-declare global {
-  interface Window {
-    electron: {
-      config: {
-        read: (filePath: string) => Promise<string | null>;
-        write: (filePath: string, content: string) => Promise<boolean>;
-        exists: (filePath: string) => Promise<boolean>;
-        backup: (filePath: string) => Promise<string | null>;
-        restore: (backupPath: string, targetPath: string) => Promise<boolean>;
-        listBackups: (configPath: string) => Promise<string[]>;
-      };
-      server: {
-        test: (command: string, args: string[], env?: Record<string, string>) => Promise<{
-          success: boolean;
-          message: string;
-          capabilities?: { tools?: string[]; prompts?: string[]; resources?: string[] };
-        }>;
-        discover: () => Promise<Array<{
-          name: string;
-          command: string;
-          args: string[];
-          source: string;
-        }>>;
-      };
-      tool: {
-        detectInstalled: (configPaths: string[]) => Promise<Record<string, boolean>>;
-        getDefinitions: () => Promise<unknown>;
-      };
-      fs: {
-        exists: (filePath: string) => Promise<boolean>;
-        readDir: (dirPath: string) => Promise<string[]>;
-      };
-      app: {
-        getPath: (name: 'home' | 'appData' | 'userData' | 'temp') => Promise<string>;
-        getPlatform: () => Promise<string>;
-      };
-      shell: {
-        openPath: (filePath: string) => Promise<{ success: boolean; error?: string }>;
-        showItemInFolder: (filePath: string) => Promise<{ success: boolean; error?: string }>;
-      };
-    };
-  }
-}
-
 export function useTools() {
   const { tools, setTools, preferences, setIsLoading, setError } = useStore();
 
