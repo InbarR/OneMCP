@@ -99,6 +99,27 @@ function App() {
 
   const exportedConfig = exportConfig(servers);
 
+  // Sort tools based on saved order
+  const sortedTools = [...tools].sort((a, b) => {
+    const order = preferences.toolOrder || [];
+    const aIndex = order.indexOf(a.id);
+    const bIndex = order.indexOf(b.id);
+
+    // If both are in the order array, sort by their position
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
+    }
+    // If only one is in the order array, it comes first
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    // Otherwise maintain original order
+    return 0;
+  });
+
+  const handleReorderTools = (newOrder: string[]) => {
+    setPreferences({ toolOrder: newOrder });
+  };
+
   return (
     <TooltipProvider>
       <div className="flex h-screen flex-col bg-background">
@@ -114,10 +135,11 @@ function App() {
 
         <div className="flex flex-1 overflow-hidden">
           <Sidebar
-            tools={tools}
+            tools={sortedTools}
             selectedToolId={selectedToolId}
             onSelectTool={setSelectedToolId}
             onAddCustomTool={() => setCustomToolFormOpen(true)}
+            onReorderTools={handleReorderTools}
           />
 
           <main className="flex-1 overflow-hidden">

@@ -39,4 +39,5 @@ export interface UserPreferences {
   maxBackups: number;
   toolOverrides?: Record<string, ToolOverride>;
   hiddenTools?: string[];
+  toolOrder?: string[];
 }
