@@ -9,7 +9,7 @@ A unified MCP (Model Context Protocol) Server Manager for AI coding tools.
 ## Features
 
 - **Manage MCP servers** across multiple AI tools from one place
-- **Supported tools**: Claude Desktop, Claude Code, Roo, Cline, VS Code Copilot, GHCP, Cursor, Copilot CLI
+- **Supported tools**: Claude Desktop, Claude Code, Roo, Cline, VS Code, GHCP, Cursor, Copilot CLI
 - **Add, edit, clone, and delete** MCP server configurations
 - **Test servers** to verify they're working
 - **Sync servers** across all your tools with one click
@@ -81,7 +81,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | Claude Code | `~/.claude.json` |
 | Roo | `%APPDATA%/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json` |
 | Cline | `%APPDATA%/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` |
-| VS Code Copilot | `%APPDATA%/Code/User/settings.json` |
+| VS Code | `%APPDATA%/Code/User/settings.json` |
 | GHCP | `%APPDATA%/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
 | Copilot CLI | `~/.copilot/mcp-config.json` |
@@ -93,7 +93,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | Claude Code | `~/.claude.json` |
 | Roo | `~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json` |
 | Cline | `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` |
-| VS Code Copilot | `~/Library/Application Support/Code/User/settings.json` |
+| VS Code | `~/Library/Application Support/Code/User/settings.json` |
 | GHCP | `~/Library/Application Support/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
 | Copilot CLI | `~/.copilot/mcp-config.json` |
@@ -105,7 +105,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | Claude Code | `~/.claude.json` |
 | Roo | `~/.config/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json` |
 | Cline | `~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` |
-| VS Code Copilot | `~/.config/Code/User/settings.json` |
+| VS Code | `~/.config/Code/User/settings.json` |
 | GHCP | `~/.config/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
 | Copilot CLI | `~/.copilot/mcp-config.json` |

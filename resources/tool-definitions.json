@@ -55,8 +55,8 @@
       "supportsDisabled": true
     },
     {
-      "id": "vscode-copilot",
-      "name": "VS Code Copilot",
+      "id": "vscode",
+      "name": "VS Code",
       "icon": "code",
       "platforms": {
         "win32": "%APPDATA%/Code/User/settings.json",
