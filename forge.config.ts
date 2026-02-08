@@ -35,7 +35,7 @@ const config: ForgeConfig = {
     }),
     new MakerZIP({}, ['darwin']),
     new MakerDMG({
-      name: 'OneMCP',
+      format: 'ULFO',
       ...(hasIcns && { icon: path.join(resourcesDir, 'icon.icns') }),
     }),
     new MakerRpm({
