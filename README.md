@@ -38,12 +38,29 @@ npm run dev
 
 ### Option 2: Download from Releases
 
-Download the appropriate package for your platform from the [Releases](https://github.com/InbarR/OneMCP/releases) page:
+Download the appropriate package for your platform from the [Releases](https://github.com/InbarR/OneMCP/releases) page.
 
-- **Windows**: `OneMCP Setup.exe`
-- **macOS Intel**: `OneMCP-darwin-x64.dmg`
-- **macOS Apple Silicon**: `OneMCP-darwin-arm64.dmg`
-- **Linux**: `.deb` (Debian/Ubuntu) or `.rpm` (Fedora/RHEL)
+#### Windows
+
+| File | Description |
+|------|-------------|
+| `OneMCP-1.0.0.Setup.exe` | **Installer** - Standard Windows installer using Squirrel. Installs to `%LocalAppData%\OneMCP` with auto-updates support. |
+| `OneMCP-win32-x64-portable.zip` | **Portable** - Extract and run directly, no installation required. Good for USB drives or restricted environments. |
+
+#### macOS
+
+| File | Description |
+|------|-------------|
+| `OneMCP-darwin-x64.dmg` | **Intel Macs** - Disk image for Macs with Intel processors. Drag to Applications to install. |
+| `OneMCP-darwin-arm64.dmg` | **Apple Silicon** - Disk image for M1/M2/M3 Macs. Drag to Applications to install. |
+| `OneMCP-darwin-*-1.0.0.zip` | **ZIP archives** - Alternative to DMG, extract the .app directly. |
+
+#### Linux
+
+| File | Description |
+|------|-------------|
+| `onemcp_1.0.0_amd64.deb` | **Debian/Ubuntu** - Install with `sudo dpkg -i onemcp_1.0.0_amd64.deb` |
+| `onemcp-1.0.0-1.x86_64.rpm` | **Fedora/RHEL** - Install with `sudo rpm -i onemcp-1.0.0-1.x86_64.rpm` |
 
 #### macOS: Gatekeeper Warning
 
