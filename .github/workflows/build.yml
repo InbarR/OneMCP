@@ -75,6 +75,12 @@ jobs:
         run: |
           codesign --force --deep --sign - --entitlements resources/entitlements.mac.plist out/OneMCP-darwin-${{ matrix.arch }}/OneMCP.app
 
+      - name: Create Windows portable ZIP
+        if: matrix.platform == 'win32'
+        run: |
+          cd out
+          7z a -tzip OneMCP-win32-${{ matrix.arch }}-portable.zip OneMCP-win32-${{ matrix.arch }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -86,6 +92,7 @@ jobs:
             out/make/**/*.deb
             out/make/**/*.rpm
             out/make/**/*.nupkg
+            out/*.zip
           if-no-files-found: error
 
   release:
