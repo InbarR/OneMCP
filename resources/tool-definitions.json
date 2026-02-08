@@ -1,16 +1,40 @@
 {
   "tools": [
     {
-      "id": "claude-desktop",
-      "name": "Claude Desktop",
-      "icon": "claude",
+      "id": "copilot-cli",
+      "name": "Copilot CLI",
+      "icon": "terminal-square",
       "platforms": {
-        "win32": "%APPDATA%/Claude/claude_desktop_config.json",
-        "darwin": "~/Library/Application Support/Claude/claude_desktop_config.json",
-        "linux": "~/.config/Claude/claude_desktop_config.json"
+        "win32": "~/.copilot/mcp-config.json",
+        "darwin": "~/.copilot/mcp-config.json",
+        "linux": "~/.copilot/mcp-config.json"
       },
       "configFormat": "mcpServers",
       "serverKey": "mcpServers"
+    },
+    {
+      "id": "ghcp",
+      "name": "GHCP",
+      "icon": "github",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/mcp.json",
+        "darwin": "~/Library/Application Support/Code/User/mcp.json",
+        "linux": "~/.config/Code/User/mcp.json"
+      },
+      "configFormat": "servers",
+      "serverKey": "servers"
+    },
+    {
+      "id": "vscode",
+      "name": "VS Code",
+      "icon": "code",
+      "platforms": {
+        "win32": "%APPDATA%/Code/User/settings.json",
+        "darwin": "~/Library/Application Support/Code/User/settings.json",
+        "linux": "~/.config/Code/User/settings.json"
+      },
+      "configFormat": "mcp.servers",
+      "serverKey": "mcp.servers"
     },
     {
       "id": "claude-code",
@@ -23,21 +47,6 @@
       },
       "configFormat": "mcpServers",
       "serverKey": "mcpServers"
-    },
-    {
-      "id": "roo",
-      "name": "Roo",
-      "icon": "bot",
-      "platforms": {
-        "win32": "%APPDATA%/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
-        "darwin": "~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
-        "linux": "~/.config/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json"
-      },
-      "configFormat": "mcpServers",
-      "serverKey": "mcpServers",
-      "supportsAlwaysAllow": true,
-      "supportsAutoApprove": true,
-      "supportsDisabled": true
     },
     {
       "id": "cline",
@@ -55,28 +64,31 @@
       "supportsDisabled": true
     },
     {
-      "id": "vscode",
-      "name": "VS Code",
-      "icon": "code",
+      "id": "roo",
+      "name": "Roo",
+      "icon": "bot",
       "platforms": {
-        "win32": "%APPDATA%/Code/User/settings.json",
-        "darwin": "~/Library/Application Support/Code/User/settings.json",
-        "linux": "~/.config/Code/User/settings.json"
+        "win32": "%APPDATA%/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
+        "darwin": "~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json",
+        "linux": "~/.config/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json"
       },
-      "configFormat": "mcp.servers",
-      "serverKey": "mcp.servers"
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers",
+      "supportsAlwaysAllow": true,
+      "supportsAutoApprove": true,
+      "supportsDisabled": true
     },
     {
-      "id": "ghcp",
-      "name": "GHCP",
-      "icon": "github",
+      "id": "claude-desktop",
+      "name": "Claude Desktop",
+      "icon": "claude",
       "platforms": {
-        "win32": "%APPDATA%/Code/User/mcp.json",
-        "darwin": "~/Library/Application Support/Code/User/mcp.json",
-        "linux": "~/.config/Code/User/mcp.json"
+        "win32": "%APPDATA%/Claude/claude_desktop_config.json",
+        "darwin": "~/Library/Application Support/Claude/claude_desktop_config.json",
+        "linux": "~/.config/Claude/claude_desktop_config.json"
       },
-      "configFormat": "servers",
-      "serverKey": "servers"
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers"
     },
     {
       "id": "cursor",
@@ -86,18 +98,6 @@
         "win32": "~/.cursor/mcp.json",
         "darwin": "~/.cursor/mcp.json",
         "linux": "~/.cursor/mcp.json"
-      },
-      "configFormat": "mcpServers",
-      "serverKey": "mcpServers"
-    },
-    {
-      "id": "copilot-cli",
-      "name": "Copilot CLI",
-      "icon": "terminal-square",
-      "platforms": {
-        "win32": "~/.copilot/mcp-config.json",
-        "darwin": "~/.copilot/mcp-config.json",
-        "linux": "~/.copilot/mcp-config.json"
       },
       "configFormat": "mcpServers",
       "serverKey": "mcpServers"

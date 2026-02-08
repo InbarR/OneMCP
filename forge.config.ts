@@ -1,7 +1,6 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerSquirrel } from '@electron-forge/maker-squirrel';
 import { MakerZIP } from '@electron-forge/maker-zip';
-import { MakerDMG } from '@electron-forge/maker-dmg';
 import { MakerDeb } from '@electron-forge/maker-deb';
 import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
@@ -16,6 +15,45 @@ const hasIco = fs.existsSync(path.join(resourcesDir, 'icon.ico'));
 const hasIcns = fs.existsSync(path.join(resourcesDir, 'icon.icns'));
 const hasPng = fs.existsSync(path.join(resourcesDir, 'icon.png'));
 
+// Conditionally import DMG maker (only available on macOS)
+let MakerDMG: any = null;
+try {
+  MakerDMG = require('@electron-forge/maker-dmg').MakerDMG;
+} catch {
+  // DMG maker not available on this platform
+}
+
+const makers: any[] = [
+  new MakerSquirrel({
+    name: 'OneMCP',
+    iconUrl: 'https://raw.githubusercontent.com/InbarR/OneMCP/main/resources/logo.png',
+    ...(hasIco && { setupIcon: path.join(resourcesDir, 'icon.ico') }),
+  }),
+  new MakerZIP({}, ['darwin']),
+  new MakerRpm({
+    options: {
+      bin: 'OneMCP',
+      ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
+    },
+  }),
+  new MakerDeb({
+    options: {
+      bin: 'OneMCP',
+      ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
+    },
+  }),
+];
+
+// Add DMG maker if available (macOS only)
+if (MakerDMG) {
+  makers.push(
+    new MakerDMG({
+      format: 'ULFO',
+      ...(hasIcns && { icon: path.join(resourcesDir, 'icon.icns') }),
+    })
+  );
+}
+
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
@@ -27,30 +65,7 @@ const config: ForgeConfig = {
     ],
   },
   rebuildConfig: {},
-  makers: [
-    new MakerSquirrel({
-      name: 'OneMCP',
-      iconUrl: 'https://raw.githubusercontent.com/InbarR/OneMCP/main/resources/logo.png',
-      ...(hasIco && { setupIcon: path.join(resourcesDir, 'icon.ico') }),
-    }),
-    new MakerZIP({}, ['darwin']),
-    new MakerDMG({
-      format: 'ULFO',
-      ...(hasIcns && { icon: path.join(resourcesDir, 'icon.icns') }),
-    }),
-    new MakerRpm({
-      options: {
-        bin: 'OneMCP',
-        ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
-      },
-    }),
-    new MakerDeb({
-      options: {
-        bin: 'OneMCP',
-        ...(hasPng && { icon: path.join(resourcesDir, 'icon.png') }),
-      },
-    }),
-  ],
+  makers,
   plugins: [
     new VitePlugin({
       build: [
