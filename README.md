@@ -9,7 +9,7 @@ A unified MCP (Model Context Protocol) Server Manager for AI coding tools.
 ## Features
 
 - **Manage MCP servers** across multiple AI tools from one place
-- **Supported tools**: Claude Desktop, Claude Code, Roo, Cline, VS Code Copilot, GHCP, Cursor
+- **Supported tools**: Claude Desktop, Claude Code, Roo, Cline, VS Code Copilot, GHCP, Cursor, Copilot CLI
 - **Add, edit, clone, and delete** MCP server configurations
 - **Test servers** to verify they're working
 - **Sync servers** across all your tools with one click
@@ -40,9 +40,20 @@ npm run dev
 
 Download the appropriate package for your platform from the [Releases](https://github.com/InbarR/OneMCP/releases) page:
 
-- **Windows**: `OneMCP-Portable.exe` or the Squirrel installer
-- **macOS**: `OneMCP-darwin-x64.zip`
+- **Windows**: `OneMCP Setup.exe`
+- **macOS Intel**: `OneMCP-darwin-x64.dmg`
+- **macOS Apple Silicon**: `OneMCP-darwin-arm64.dmg`
 - **Linux**: `.deb` (Debian/Ubuntu) or `.rpm` (Fedora/RHEL)
+
+#### macOS: Gatekeeper Warning
+
+Since the app isn't signed with an Apple Developer certificate, macOS may show a warning that the app "is damaged" or "can't be opened". To fix this:
+
+```bash
+xattr -cr /Applications/OneMCP.app
+```
+
+Then open the app normally.
 
 ## Building
 
@@ -73,6 +84,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | VS Code Copilot | `%APPDATA%/Code/User/settings.json` |
 | GHCP | `%APPDATA%/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
+| Copilot CLI | `~/.copilot/mcp-config.json` |
 
 ### macOS
 | Tool | Config Path |
@@ -84,6 +96,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | VS Code Copilot | `~/Library/Application Support/Code/User/settings.json` |
 | GHCP | `~/Library/Application Support/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
+| Copilot CLI | `~/.copilot/mcp-config.json` |
 
 ### Linux
 | Tool | Config Path |
@@ -95,6 +108,7 @@ OneMCP reads and writes to the configuration files of each supported AI tool:
 | VS Code Copilot | `~/.config/Code/User/settings.json` |
 | GHCP | `~/.config/Code/User/mcp.json` |
 | Cursor | `~/.cursor/mcp.json` |
+| Copilot CLI | `~/.copilot/mcp-config.json` |
 
 ## Tech Stack
 

@@ -89,6 +89,18 @@
       },
       "configFormat": "mcpServers",
       "serverKey": "mcpServers"
+    },
+    {
+      "id": "copilot-cli",
+      "name": "Copilot CLI",
+      "icon": "terminal-square",
+      "platforms": {
+        "win32": "~/.copilot/mcp-config.json",
+        "darwin": "~/.copilot/mcp-config.json",
+        "linux": "~/.copilot/mcp-config.json"
+      },
+      "configFormat": "mcpServers",
+      "serverKey": "mcpServers"
     }
   ]
 }
